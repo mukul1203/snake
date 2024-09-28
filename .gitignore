@@ -1,32 +1,44 @@
-# Prerequisites
-*.d
+# Build directories
+/build/
+**/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
 
-# Compiled Object files
-*.slo
-*.lo
+# Compiled source
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
-*.lib
-
-# Executables
 *.exe
 *.out
-*.app
+*.dll
+*.dylib
+
+# Temporary files
+*.tmp
+*.log
+*.class
+
+# CMake generated files
+*.make
+*.ninja
+*.idb
+*.ipch
+*.pdb
+*.sdf
+*.suo
+*.user
+*.tlog
+*.lastbuildstate
+
+# IDE specific files
+/.vscode/
+/.idea/
+/*.swp
+
+# Generated files
+*.generated.*
+
+# Python virtual environment (if applicable)
+venv/
+env/
