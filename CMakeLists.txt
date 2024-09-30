@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 3.11)
 set (CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
+include(ExternalProject)
+
 set(FETCHCONTENT_UPDATES_DISCONNECTED TRUE)
 
 # --- Fetch FTXUI --------------------------------------------------------------
@@ -63,49 +65,69 @@ include_directories(${BOOST_INCLUDEDIR})
 # --- Fetch other dependencies --------------------------------------------------------------
 
 # cereal
-FetchContent_Declare(
+ExternalProject_Add(
   cereal
   GIT_REPOSITORY https://github.com/USCiLab/cereal.git
   GIT_TAG v1.3.0 # Replace with the desired version or commit hash
-  EXCLUDE_FROM_ALL
+  CMAKE_ARGS
+        -DBUILD_TESTING=OFF  # If this option is available, pass it
+  BUILD_COMMAND ""         # Skip building anything
+  TEST_COMMAND ""          # Disable running tests
+  INSTALL_COMMAND ""       # Skip installation
 )
-FetchContent_MakeAvailable(cereal)
+ExternalProject_Get_Property(cereal source_dir)
 
 # hana
-FetchContent_Declare(
+ExternalProject_Add(
   hana
   GIT_REPOSITORY https://github.com/boostorg/hana.git
   GIT_TAG v1.6.0 # Replace with the desired version or commit hash
-  EXCLUDE_FROM_ALL
+  CMAKE_ARGS
+        -DBUILD_TESTING=OFF  # If this option is available, pass it
+  BUILD_COMMAND ""         # Skip building anything
+  TEST_COMMAND ""          # Disable running tests
+  INSTALL_COMMAND ""       # Skip installation
 )
-FetchContent_MakeAvailable(hana)
+ExternalProject_Get_Property(hana source_dir)
 
 # immer
-FetchContent_Declare(
+ExternalProject_Add(
   immer
   GIT_REPOSITORY https://github.com/arximboldi/immer.git
   GIT_TAG v0.6.2 # Replace with the desired version or commit hash
-  EXCLUDE_FROM_ALL
+  CMAKE_ARGS
+        -DBUILD_TESTING=OFF  # If this option is available, pass it
+  BUILD_COMMAND ""         # Skip building anything
+  TEST_COMMAND ""          # Disable running tests
+  INSTALL_COMMAND ""       # Skip installation
 )
-FetchContent_MakeAvailable(immer)
+ExternalProject_Get_Property(immer source_dir)
 
 # lager
-FetchContent_Declare(
+ExternalProject_Add(
   lager
   GIT_REPOSITORY https://github.com/arximboldi/lager.git
   GIT_TAG v0.1.0 # Replace with the desired version or commit hash
-  EXCLUDE_FROM_ALL
+  CMAKE_ARGS
+        -DBUILD_TESTING=OFF  # If this option is available, pass it
+  BUILD_COMMAND ""         # Skip building anything
+  TEST_COMMAND ""          # Disable running tests
+  INSTALL_COMMAND ""       # Skip installation
 )
-FetchContent_MakeAvailable(lager)
+ExternalProject_Get_Property(lager source_dir)
 
 # zug
-FetchContent_Declare(
+ExternalProject_Add(
   zug
   GIT_REPOSITORY https://github.com/arximboldi/zug.git
   GIT_TAG v0.2.0 # Replace with the desired version or commit hash
-  EXCLUDE_FROM_ALL
+  CMAKE_ARGS
+        -DBUILD_TESTING=OFF  # If this option is available, pass it
+  BUILD_COMMAND ""         # Skip building anything
+  TEST_COMMAND ""          # Disable running tests
+  INSTALL_COMMAND ""       # Skip installation
 )
-FetchContent_MakeAvailable(zug)
+ExternalProject_Get_Property(zug source_dir)
 
 # ------------------------------------------------------------------------------
 
