@@ -50,13 +50,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(BoostHeaders)
 
 # Set the Boost include directory
-set(Boost_INCLUDEDIR ${BOOST_SOURCE_DIR})
+set(BOOST_INCLUDEDIR ${BOOST_SOURCE_DIR})
 
 # Set the BOOST_ROOT variable to the source directory
 set(BOOST_ROOT ${BOOST_SOURCE_DIR})
 
+find_package(Boost REQUIRED)
+
 # Add include directories
-include_directories(${Boost_INCLUDEDIR})
+include_directories(${BOOST_INCLUDEDIR})
 
 # --- Fetch other dependencies --------------------------------------------------------------
 
@@ -114,7 +116,7 @@ project(snake
 )
 
 # Instead of listing each component individually, headers component is catch all. Includes all the header-only components of boost.
-find_package(Boost REQUIRED COMPONENTS serialization)
+# find_package(Boost REQUIRED COMPONENTS serialization)
 # Check if Boost was found and output the include directories
 if(Boost_FOUND)
   message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
@@ -125,7 +127,7 @@ endif()
 add_executable(snake src/main.cpp)
 
 target_include_directories(snake PUBLIC
-    ${Boost_INCLUDEDIR}
+    ${BOOST_INCLUDEDIR}
     src                    # Your source directory
     $<TARGET_PROPERTY:cereal,INTERFACE_INCLUDE_DIRECTORIES>  # Automatically get include dirs for cereal
     $<TARGET_PROPERTY:hana,INTERFACE_INCLUDE_DIRECTORIES>    # Automatically get include dirs for hana
