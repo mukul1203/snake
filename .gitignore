@@ -1,5 +1,6 @@
 # Build directories
 /build/
+/build_emscripten/
 **/build/
 **/CMakeFiles/
 **/CMakeCache.txt
