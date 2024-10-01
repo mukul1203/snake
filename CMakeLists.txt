@@ -21,100 +21,25 @@ endif()
 # ------------------------------------------------------------------------------
 
 # --- Fetch Boost --------------------------------------------------------------
-
-# # Specify the Boost version you want to use
-# set(BOOST_VERSION 1.72.0)
-
-# # Extract major, minor, and patch version numbers
-# string(REGEX MATCH "([0-9]+).([0-9]+).([0-9]+)" BOOST_VERSION_MATCH ${BOOST_VERSION})
-# set(BOOST_VERSION_MAJOR ${CMAKE_MATCH_1})
-# set(BOOST_VERSION_MINOR ${CMAKE_MATCH_2})
-# set(BOOST_VERSION_PATCH ${CMAKE_MATCH_3})
-
-# # Print the versions to verify
-# message(STATUS "Boost Version: ${BOOST_VERSION}")
-# message(STATUS "Major: ${BOOST_VERSION_MAJOR}, Minor: ${BOOST_VERSION_MINOR}, Patch: ${BOOST_VERSION_PATCH}")
-
-# # Generate the URL with underscores
-# set(BOOST_URL https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION_MAJOR}_${BOOST_VERSION_MINOR}_${BOOST_VERSION_PATCH}.tar.gz)
-
-# set(BOOST_SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/boost-src)
-
-# # Fetch the Boost library
-# FetchContent_Declare(
-#   BoostHeaders
-#   URL ${BOOST_URL}
-#   # Replace with the actual hash for the specified version found on dowload page https://www.boost.org/users/download/
-#   URL_HASH SHA256=c66e88d5786f2ca4dbebb14e06b566fb642a1a6947ad8cc9091f9f445134143f
-#   SOURCE_DIR ${BOOST_SOURCE_DIR}
-# )
-
-# FetchContent_MakeAvailable(BoostHeaders)
-
-# # Set the Boost include directory
-# set(BOOST_INCLUDEDIR ${BOOST_SOURCE_DIR})
-
-# # Set the BOOST_ROOT variable to the source directory
-# set(BOOST_ROOT ${BOOST_SOURCE_DIR})
-
-# find_package(Boost REQUIRED)
-
-# # Add include directories
-# include_directories(${BOOST_INCLUDEDIR})
-
-# External project to fetch Boost headers
-# ExternalProject_Add(
-#     boost_headers
-#     GIT_REPOSITORY https://github.com/boostorg/boost.git
-#     GIT_TAG boost-1.72.0  # Specify the Boost version
-#     CONFIGURE_COMMAND ""  # No configure step needed for headers
-#     BUILD_COMMAND ""      # No build step needed for headers
-#     INSTALL_COMMAND ""    # Skip the install step
-#     UPDATE_DISCONNECTED 1 # Don’t fetch again if already downloaded
-# )
-
-# # Get the path to the Boost source directory
-# ExternalProject_Get_Property(boost_headers source_dir)
-
-# # Add the Boost include directory to your project
-# include_directories(${source_dir})
-
-
-# ExternalProject_Add(
-#     boost_project
-#     URL https://archives.boost.io/release/1.72.0/source/boost_1_72_0.tar.gz
-#     DOWNLOAD_DIR ${CMAKE_BINARY_DIR}/boost_download
-#     DOWNLOAD_NAME boost_1_72_0.tar.gz
-#     DOWNLOAD_NO_PROGRESS 1
-#     UPDATE_COMMAND ""
-#     CONFIGURE_COMMAND ""
-#     BUILD_COMMAND ""
-#     # INSTALL_DIR ${CMAKE_BINARY_DIR}/boost_install
-#     INSTALL_COMMAND ""
-# )
-
-# ExternalProject_Get_Property(boost_project source_dir)
-# message(STATUS "source_dir: ${source_dir}")
-# include_directories(${source_dir}/boost)
-# link_directories(${source_dir}/libs)
-
-# Fetch and build Boost with the System library
+# Fetch and build Boost
+set(BOOST_PROJECT_NAME boost_project)
+set(BOOST_BASE_DIR ${CMAKE_BINARY_DIR}/${BOOST_PROJECT_NAME}-prefix)
+set(BOOST_ROOT ${BOOST_BASE_DIR}/src/${BOOST_PROJECT_NAME})
 ExternalProject_Add(
-    boost_project
+    ${BOOST_PROJECT_NAME}
+    PREFIX ${BOOST_BASE_DIR}
     GIT_REPOSITORY https://github.com/boostorg/boost.git
     GIT_TAG boost-1.72.0  # Specify the version
     UPDATE_DISCONNECTED 1 # Don't update each time
-    CMAKE_ARGS
-        -DBoost_INCLUDE_DIR=${CMAKE_BINARY_DIR}/boost_project/include
-        -DBoost_SYSTEM=ON    # Enable building the Boost.System component
-        -sBOOST_ROOT=${CMAKE_BINARY_DIR}/boost_project-prefix/src/boost_project
-    CONFIGURE_COMMAND ${CMAKE_BINARY_DIR}/boost_project-prefix/src/boost_project/bootstrap.sh
-    BUILD_COMMAND ./b2 install --with-system --prefix=${CMAKE_BINARY_DIR}/boost_project
-    # INSTALL_DIR ${CMAKE_BINARY_DIR}/boost_project
+    CONFIGURE_COMMAND ${BOOST_ROOT}/bootstrap.sh
+    BUILD_COMMAND ./b2 install
+    INSTALL_DIR ${BOOST_ROOT}-build
+    BUILD_IN_SOURCE 1  # Ensure that b2 is run from the source directory
 )
 
 # After the Boost project is fetched and built, include the headers and libraries
-ExternalProject_Get_Property(boost_project install_dir)
+ExternalProject_Get_Property(${BOOST_PROJECT_NAME} install_dir)
+ExternalProject_Get_Property(${BOOST_PROJECT_NAME} source_dir)
 include_directories(${install_dir}/include)
 link_directories(${install_dir}/lib)
 # --- Fetch other dependencies --------------------------------------------------------------
