@@ -1,0 +1,15 @@
+[submodule "src/external/cereal"]
+	path = src/external/cereal
+	url = https://github.com/USCiLab/cereal.git
+[submodule "src/external/hana"]
+	path = src/external/hana
+	url = https://github.com/boostorg/hana.git
+[submodule "src/external/immer"]
+	path = src/external/immer
+	url = https://github.com/arximboldi/immer.git
+[submodule "src/external/lager"]
+	path = src/external/lager
+	url = https://github.com/arximboldi/lager.git
+[submodule "src/external/zug"]
+	path = src/external/zug
+	url = https://github.com/arximboldi/zug.git
