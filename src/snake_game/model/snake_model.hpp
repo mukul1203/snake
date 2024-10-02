@@ -52,6 +52,9 @@ public:
         dir = d;
     }
 
+    const game::utils::direction& get_direction() const {
+        return dir;
+    }
 private:
     // snake represented as a vector of points
     immer::flex_vector<game::utils::point> points{{0,0}};

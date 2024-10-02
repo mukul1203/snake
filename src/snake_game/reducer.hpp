@@ -36,6 +36,9 @@ inline update_result update(game_model c, action action) {
                            },
                           [&](change_direction_action a)->update_result { 
                             c.snake_modl.set_direction(a.new_direction);
+                            //We want to move faster if user presses the key in the existing direction of snake.
+                            // if(a.new_direction == c.snake_modl.get_direction())
+                            //     c.snake_modl.take_step();
                             return {c, lager::noop};
                            },
                       },
