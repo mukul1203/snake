@@ -8,7 +8,7 @@ namespace game {
 struct instance {
     //Render
     auto operator()() {
-        auto& model = game::g_instance; 
+        const auto& model = game::get_store().get();
         int canvas_w = game::board_width, canvas_h = game::board_height;
         auto c = ftxui::Canvas(canvas_w, canvas_h);
         // Draw apple

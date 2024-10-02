@@ -42,7 +42,7 @@ public:
         return (std::find(pts.begin()+1, pts.end(), head()) != pts.end());
     }
 
-    void for_each(std::function<void(const game::utils::point&)> f) {
+    void for_each(std::function<void(const game::utils::point&)> f) const {
         std::for_each(points.begin(), points.end(), [_f = std::move(f)](const auto& p) {
             _f(p);
         });

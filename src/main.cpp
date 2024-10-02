@@ -22,7 +22,6 @@ void run_snake_game() {
     auto screen = ftxui::ScreenInteractive::FitComponent();
 
     watch(game::get_store(), [&](auto model){
-      game::g_instance = model;
       // Trigger rendering by posting a custom dummy event. Loop object handles events once per loop and renders only if there was an event.
       screen.PostEvent(ftxui::Event::Custom);
     });
@@ -30,7 +29,7 @@ void run_snake_game() {
     ftxui::Loop loop(&screen, game::get());
  
     while (!loop.HasQuitted()) {
-      if(game::g_instance.over)
+      if(game::get_store().get().over)
         break;
       game::get_store().dispatch(game::tick_action{});
       loop.RunOnce();
