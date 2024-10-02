@@ -1,5 +1,5 @@
-#include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
-#include "ftxui/component/loop.hpp" 
+#include "ftxui/component/screen_interactive.hpp" // for ScreenInteractive
+#include "ftxui/component/loop.hpp"
 
 #include "snake_game/ui/game_component.hpp"
 #include "snake_game/store.hpp"
@@ -18,26 +18,29 @@
 // Selectors are functions having access to store, and they return portions of the store state. Components should use selectors to access the needed store state.
 // Local state should just be members of the component class being defined.
 
-void run_snake_game() {
-    auto screen = ftxui::ScreenInteractive::FitComponent();
+void run_snake_game()
+{
+  auto screen = ftxui::ScreenInteractive::FitComponent();
 
-    watch(game::get_store(), [&](auto model){
+  watch(game::get_store(), [&](auto model)
+        {
       // Trigger rendering by posting a custom dummy event. Loop object handles events once per loop and renders only if there was an event.
-      screen.PostEvent(ftxui::Event::Custom);
-    });
+      screen.PostEvent(ftxui::Event::Custom); });
 
-    ftxui::Loop loop(&screen, game::board());
- 
-    while (!loop.HasQuitted()) {
-      if(game::get_store().get().over)
-        break;
-      game::get_store().dispatch(game::tick_action{});
-      loop.RunOnce();
-      std::this_thread::sleep_for(std::chrono::milliseconds(game::interval));
-    }
+  ftxui::Loop loop(&screen, game::board());
+
+  while (!loop.HasQuitted())
+  {
+    if (game::get_store().get().over)
+      break;
+    game::get_store().dispatch(game::tick_action{});
+    loop.RunOnce();
+    std::this_thread::sleep_for(std::chrono::milliseconds(game::interval));
+  }
 }
 
-int main(void) {
+int main(void)
+{
   run_snake_game();
   return EXIT_SUCCESS;
 }

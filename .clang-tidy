@@ -1,0 +1,55 @@
+Checks: >
+  -*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  bugprone-*,
+  misc-*,
+  hicpp-*,
+  portability-*,
+  cert-*,
+  google-*,
+  llvm-*,
+  abseil-*,
+  mpi-*,
+  fuchsia-*,
+  concurrency-*,
+  android-*,
+  openmp-*,
+  oclint-*,
+  boost-*,
+  system-*, 
+  zlib-*,
+  darwin-*,
+  windows-*,
+  valgrind-*,
+  cata-*,
+  webkit-*,
+  unix-*,
+  llvm-header-guard,
+  readability-identifier-length,
+  readability-function-cognitive-complexity,
+  readability-avoid-const-params-in-decls
+
+WarningsAsErrors: '*'
+
+HeaderFilterRegex: '.*'
+
+AnalyzeTemporaryDtors: true
+CheckOptions:
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             cppcoreguidelines-pro-type-vararg.name
+    value:           ''
+  - key:             modernize-use-trailing-return-type.MinimumLength
+    value:           '5'
+  - key:             readability-function-cognitive-complexity.Threshold
+    value:           '20'
+  - key:             modernize-use-trailing-return-type.IncludeAutoFunctions
+    value:           'true'
+  - key:             readability-identifier-length.MinLength
+    value:           '3'
+  - key:             readability-identifier-length.MaxLength
+    value:           '40'

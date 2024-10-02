@@ -5,10 +5,12 @@
 #include <lager/event_loop/manual.hpp>
 #include <lager/store.hpp>
 
-namespace game {
-    auto& get_store() {
+namespace game
+{
+    auto &get_store()
+    {
         static auto store = lager::make_store<game::action>(
-        game_model{}, lager::with_manual_event_loop{});
+            game_model{}, lager::with_manual_event_loop{});
         return store;
     }
 }
