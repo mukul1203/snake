@@ -26,7 +26,7 @@ void run_snake_game() {
       screen.PostEvent(ftxui::Event::Custom);
     });
 
-    ftxui::Loop loop(&screen, game::get());
+    ftxui::Loop loop(&screen, game::board());
  
     while (!loop.HasQuitted()) {
       if(game::get_store().get().over)
