@@ -1,37 +1,85 @@
-# snake
-Play the snake game on your terminal
+# Snake Game on Your Terminal
 
+### Step 1: Update Your System
 
+Run the following command to update your system:
+
+```bash
 sudo apt update
+```
 
+### Step 2: Install Boost Libraries
+
+To install all Boost libraries, run:
+
+```bash
 sudo apt install libboost-all-dev
+```
 
-mkdir build && cd build
-cmake ..
-make
+### Step 3: Build the Snake Game
 
-./snake
+1. Create a build directory and navigate into it:
 
+   ```bash
+   mkdir build && cd build
+   ```
 
-# To install emsdk and finally emcmake:
+2. Generate the makefile using CMake:
 
-Install Dependencies: Emscripten requires some common development tools and Python. Run the following to install them:
+   ```bash
+   cmake ..
+   ```
 
+3. Build the project:
+
+   ```bash
+   make
+   ```
+
+4. Run the Snake game:
+
+   ```bash
+   ./snake
+   ```
+
+---
+
+# Emscripten Setup
+
+### Step 1: Install Dependencies
+
+Emscripten requires development tools and Python. Install them by running:
+
+```bash
 sudo apt-get update
 sudo apt-get install build-essential cmake python3
+```
 
-Download and Install Emscripten: Download the Emscripten SDK by cloning its Git repository:
+### Step 2: Download and Install Emscripten
 
+Clone the Emscripten SDK repository:
+
+```bash
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
+```
 
-Install and Activate Emscripten: After cloning, use the following commands to install and activate Emscripten:
+### Step 3: Install and Activate Emscripten
 
-## Fetch the latest version of the Emscripten SDK
-./emsdk install latest
+1. Fetch the latest version of the Emscripten SDK:
 
-## Activate the latest SDK tools in the current terminal session
-./emsdk activate latest
+   ```bash
+   ./emsdk install latest
+   ```
 
-## Activate Emscripten for the current terminal session
-source ./emsdk_env.sh
+2. Activate the latest SDK tools in the current terminal session:
+
+   ```bash
+   ./emsdk activate latest
+   ```
+
+3. Activate Emscripten for the current terminal session:
+
+   ```bash
+   source ./emsdk_env.sh
+   ```
