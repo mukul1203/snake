@@ -1,5 +1,7 @@
 # Snake Game on Your Terminal
 
+<img src="https://github.com/user-attachments/assets/5d5bdf64-8b3b-4655-9d23-f6232354f579" width="300" alt="Snake Game">
+
 ### Step 0: Clone the repository
 
 Run the following command to clone the repository:
