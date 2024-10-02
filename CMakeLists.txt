@@ -27,7 +27,7 @@ project(snake
 find_package(Boost REQUIRED COMPONENTS headers)
 
 add_executable(snake src/main.cpp)
-target_include_directories(snake PRIVATE ${Boost_INCLUDE_DIRS} src src/external/cereal/include src/external/hana/include src/external/immer src/external/lager src/external/zug)
+target_include_directories(snake PRIVATE ${Boost_INCLUDE_DIRS} src/snake_game src/external/cereal/include src/external/hana/include src/external/immer src/external/lager src/external/zug)
 
 target_link_libraries(snake
   PRIVATE ftxui::screen

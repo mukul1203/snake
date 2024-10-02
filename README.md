@@ -1,5 +1,19 @@
 # Snake Game on Your Terminal
 
+### Step 0: Clone the repository
+
+Run the following command to clone the repository:
+
+```bash
+git clone --recursive <url_of_repo> 
+```
+This will clone the git submodules as well recursively.
+However, if you open the repo in github codespaces, you will need to run
+```bash
+git submodule update --init --recursive
+```
+to pull the submodules after the fact.
+
 ### Step 1: Update Your System
 
 Run the following command to update your system:
@@ -42,9 +56,12 @@ sudo apt install libboost-all-dev
    ./snake
    ```
 
+5. To debug:
+    Install cmake and cmake tools extensions. Then under the extension panel, you will find option to Debug (play button next to it). Just hit it and choose the target snake. Your breakpoints will start hitting.
 ---
 
-# Emscripten Setup
+
+# Emscripten Setup (not yet working)
 
 ### Step 1: Install Dependencies
 
